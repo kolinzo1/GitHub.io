@@ -64,7 +64,7 @@ function buildCharts(sample) {
     var subjectSample = allSamples.filter(arr => arr["id"] === sample);
     
     console.log(subjectSample);
-    console.log(subjectMetadata);
+    
     //  5. Create a variable that holds the first sample in the array.
     var firstSample = subjectSample[0];
     console.log(firstSample);
@@ -121,12 +121,17 @@ function buildCharts(sample) {
     Plotly.newPlot('bubble', bubbleData, bubbleLayout);
 
     var allMetadata = data.metadata;
-    const allMetadataSet = [];
-    var subjectMetadata = allMetadata.filter(arr => arr["id"] === sample);
+    var allMetadataObj = Object.values(allMetadata);
+    var allMetadataSet = "id";
+    var subjectMetadata = allMetadata.filter(obj => obj[allMetadataSet] === +sample);
     var firstMetadata = subjectMetadata[0];
-    var washFreq = subjectMetadata["wfreq"];
+    var washFreq = subjectMetadata[0].wfreq;
     var washFreqNum = parseFloat(washFreq);
-    console.log(allMetadataSet);
+    // console.log(allMetadataObj);
+    // console.log(allMetadataSet);
+    console.log(subjectMetadata);
+    console.log(washFreq);
+    console.log(allMetadata);
 
     // 4. Create the trace for the gauge chart.
     var gaugeData = [
